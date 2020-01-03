@@ -16,6 +16,13 @@ chcp 65001
 
 @echo PC information> PC-info.txt
 
+REM  TODO:: FEATURE_0001
+REM  TODO:: TO SIMPIFILY BELOW STRUCTURE
+
+
+
+
+
 REM Get Serial number
 set "output="
 for /f "skip=1 delims=" %%a in ('wmic bios get serialnumber') do (
