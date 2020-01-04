@@ -1,0 +1,4 @@
+wmic csproduct get name /value
+wmic path softwarelicensingservice get OA3xOriginalProductKey /value
+wmic bios get serialnumber /value
+

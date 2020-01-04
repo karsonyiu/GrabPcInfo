@@ -19,73 +19,84 @@ chcp 65001
 REM  TODO:: FEATURE_0001
 REM  TODO:: TO SIMPIFILY BELOW STRUCTURE
 
+for /f "skip=1 tokens=* delims=" %%a in (getPCinfo.ifo) do (
 
-
-
-
-REM Get Serial number
-set "output="
-for /f "skip=1 delims=" %%a in ('wmic bios get serialnumber') do (
-    for /f "delims=" %%b in ("%%a") do if not defined output set "output=%%~nb"
+	for /f "skip=1 tokens=* delims=" %%b in ('%%a') do (
+		@echo(%%b) >> getPCinfo.txt
+	)
 )
 
-@echo Serial number	%output% >> PC-info.txt
+for /f "usebackq tokens=* delims=" %%a in ("getPCinfo.txt") do (echo(%%a)>>~.txt
+move /y  ~.txt "getPCinfo.txt"
 
 
-REM Get Serial number
-set "output="
-for /f "skip=1 delims=" %%a in ('wmic csproduct get name') do (
-    for /f "delims=" %%b in ("%%a") do if not defined output set "output=%%~nb"
-)
-
-@echo Product name	%output% >> PC-info.txt
-
-REM execute a batch with administrator rights
-REM runas /noprofile /user:mymachine\administrator yourbatchfile.bat
 
 
-REM Get window Product key (Need administrator right)
-set "OUTPUT=(`wmic path softwarelicensingservice get OA3xOriginalProductKey /value`)"
-CALL:WriteListOutput "%OUTPUT%" PC-info.txt
 
-set "OUTPUT=(`wmic bios get serialnumber /value`)"
-CALL:WriteListOutput "%OUTPUT%" PC-info.txt
 
-set "OUTPUT=('\"wmic cpu get name,ProcessorId /value\"')"
-CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+REM REM Get Serial number
+REM set "output="
+REM for /f "skip=1 delims=" %%a in ('wmic bios get serialnumber') do (
+    REM for /f "delims=" %%b in ("%%a") do if not defined output set "output=%%~nb"
+REM )
 
-set OUTPUT=(`wmic memphysical get MaxCapacity /value`)
-CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+REM @echo Serial number	%output% >> PC-info.txt
 
-set OUTPUT=(`wmic diskdrive get Model^,size /value`)
-CALL:WriteListOutput "%OUTPUT%" PC-info.txt
 
-set OUTPUT=(`wmic csproduct get Vendor^,Name^,UUID /value`)
-CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+REM REM Get Serial number
+REM set "output="
+REM for /f "skip=1 delims=" %%a in ('wmic csproduct get name') do (
+    REM for /f "delims=" %%b in ("%%a") do if not defined output set "output=%%~nb"
+REM )
 
-set OUTPUT=(`wmic os get caption, serialnumber /value`)
-CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+REM @echo Product name	%output% >> PC-info.txt
 
-set OUTPUT=(`wmic computersystem get domain,name /value`)
-CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+REM REM execute a batch with administrator rights
+REM REM runas /noprofile /user:mymachine\administrator yourbatchfile.bat
 
-set "OUTPUT=(`wmic DISKDRIVE get InterfaceType,Name,Size,Status /value`)"
-CALL:WriteListOutput "%OUTPUT%" PC-info.txt
 
-REM Get Network adapters and their MAC addresses
-set OUTPUT=(`wmic nic where 'PNPDeviceID like "%%%%%PCI%%%%%%"' get Name,MACAddress /value`)
-CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+REM REM Get window Product key (Need administrator right)
+REM set "OUTPUT=(`wmic path softwarelicensingservice get OA3xOriginalProductKey /value`)"
+REM CALL:WriteListOutput "%OUTPUT%" PC-info.txt
 
-set "OUTPUT=(`WMIC NICCONFIG where 'IPEnabled=True and TcpipNetbiosOptions!=null and TcpipNetbiosOptions!=2' get description,dnshostname,ipaddress,DefaultIPGateway,DNSServerSearchOrder,DHCPServer,macaddress /format:list`)"
-CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+REM set "OUTPUT=(`wmic bios get serialnumber /value`)"
+REM CALL:WriteListOutput "%OUTPUT%" PC-info.txt
 
-set OUTPUT=(`wmic USERACCOUNT get Caption,Name,PasswordRequired,Status`)
-CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+REM set "OUTPUT=('\"wmic cpu get name,ProcessorId /value\"')"
+REM CALL:WriteListOutput "%OUTPUT%" PC-info.txt
 
-REM Get harddisk serial number   
-wmic path win32_physicalmedia get SerialNumber
+REM set OUTPUT=(`wmic memphysical get MaxCapacity /value`)
+REM CALL:WriteListOutput "%OUTPUT%" PC-info.txt
 
-wmic RDACCOUNT list full
+REM set OUTPUT=(`wmic diskdrive get Model^,size /value`)
+REM CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+
+REM set OUTPUT=(`wmic csproduct get Vendor^,Name^,UUID /value`)
+REM CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+
+REM set OUTPUT=(`wmic os get caption, serialnumber /value`)
+REM CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+
+REM set OUTPUT=(`wmic computersystem get domain,name /value`)
+REM CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+
+REM set "OUTPUT=(`wmic DISKDRIVE get InterfaceType,Name,Size,Status /value`)"
+REM CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+
+REM REM Get Network adapters and their MAC addresses
+REM set OUTPUT=(`wmic nic where 'PNPDeviceID like "%%%%%PCI%%%%%%"' get Name,MACAddress /value`)
+REM CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+
+REM set "OUTPUT=(`WMIC NICCONFIG where 'IPEnabled=True and TcpipNetbiosOptions!=null and TcpipNetbiosOptions!=2' get description,dnshostname,ipaddress,DefaultIPGateway,DNSServerSearchOrder,DHCPServer,macaddress /format:list`)"
+REM CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+
+REM set OUTPUT=(`wmic USERACCOUNT get Caption,Name,PasswordRequired,Status`)
+REM CALL:WriteListOutput "%OUTPUT%" PC-info.txt
+
+REM REM Get harddisk serial number   
+REM wmic path win32_physicalmedia get SerialNumber
+
+REM wmic RDACCOUNT list full
 
 
 
