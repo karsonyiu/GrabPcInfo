@@ -30,6 +30,15 @@ try:
         print('UserName: {}'.format(cs.UserName))
         print('PrimaryOwnerName: {}'.format(cs.PrimaryOwnerName))
  
+	# Network Configuration
+    print('\n---------- Win32_NetworkAdapterConfiguration -------------')
+    for interface in conn.Win32_NetworkAdapterConfiguration (IPEnabled=1):
+        if interface.DefaultIPGateway != None:
+            for ip in interface.IPAddress:
+                if ip != "":
+                    print (interface.Description, interface.MACAddress, ip)
+                print
+
 except Exception as e:
     print(e)
 
