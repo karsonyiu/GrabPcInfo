@@ -1,0 +1,15 @@
+wmic csproduct get name /value
+wmic path softwarelicensingservice get OA3xOriginalProductKey /value
+wmic bios get serialnumber /value
+wmic cpu get name,ProcessorId /value
+wmic memphysical get MaxCapacity /value
+wmic diskdrive get Model,size /value
+wmic csproduct get Vendor,Name,UUID /value
+wmic os get caption,serialnumber /value
+wmic computersystem get domain,name /value
+wmic DISKDRIVE get InterfaceType,Name,Size,Status /value
+wmic nic where 'PNPDeviceID like "%%%%%PCI%%%%%%"' get Name,MACAddress /value
+WMIC NICCONFIG where 'IPEnabled=True and TcpipNetbiosOptions!=null and TcpipNetbiosOptions!=2' get description,dnshostname,ipaddress,DefaultIPGateway,DNSServerSearchOrder,DHCPServer,macaddress /value
+wmic USERACCOUNT get Caption,Name,PasswordRequired,Status
+
+
