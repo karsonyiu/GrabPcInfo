@@ -37,8 +37,22 @@ try:
             for ip in interface.IPAddress:
                 if ip != "":
                     print (interface.Description, interface.MACAddress, ip)
-                print
+                print('-')
 
+    # Operating system & OS version
+    print('\n---------- Win32_OperatingSystem -------------')
+    for os in conn.Win32_OperatingSystem():
+        print('OS : {}'.format(os.Caption))
+        print('Version: {}'.format(os.Version))
+        print('CountryCode: {}'.format(os.CountryCode))
+        print('OSLanguage: {}'.format(os.OSLanguage))
+        print('Locale: {}'.format(os.Locale))
+        print('CSName: {}'.format(os.CSName))
+        print('Organization: {}'.format(os.Organization))
+        print('SerialNumber: {}'.format(os.SerialNumber))
+        print('-')
+        
+		
 except Exception as e:
     print(e)
 
