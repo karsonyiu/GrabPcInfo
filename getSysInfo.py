@@ -53,6 +53,16 @@ try:
         print('-')
         
 		
+	# BIOS information
+    print('\n---------- Win32_BIOS -------------')
+    for b in conn.Win32_BIOS():
+        print('Caption: {}'.format(b.Caption))
+        print('Name: {}'.format(b.Name))
+        print('SerialNumber: {}'.format(b.SerialNumber))
+        print('-')
+        
+
+
 except Exception as e:
     print(e)
 
