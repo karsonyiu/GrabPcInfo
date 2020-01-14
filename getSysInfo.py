@@ -69,6 +69,20 @@ try:
         print( 'ProcessorId: {}'.format(pr.ProcessorId))
         print('-')
 
+    # RAM Information
+    print('\n---------- Win32_PhysicalMemory -------------')
+    for pm in conn.Win32_PhysicalMemory():
+        print('Manufacturer: {}'.format(pm.Manufacturer))
+        print('Caption: {}'.format(pm.Caption))
+        print('Description: {}'.format(pm.Description))
+        print('Name: {}'.format(pm.Name))
+        print('Model: {}'.format(pm.Model))
+        print('SKU: {}'.format(pm.SKU))
+        print('SerialNumber: {}'.format(pm.SerialNumber))
+        print('Capacity: {} GB'.format(round(float(pm.Capacity)/1024/1024/1024,1)))
+        print('-')
+        
+		
 
 except Exception as e:
     print(e)
