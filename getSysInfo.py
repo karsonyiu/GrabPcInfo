@@ -83,6 +83,12 @@ try:
         print('-')
         
 		
+    # GPU model Name
+    print('\n---------- Win32_VideoController -------------')
+    for vc in conn.Win32_VideoController():
+        print('GPU: {}'.format(vc.Name ))
+        print('-')
+
 
 except Exception as e:
     print(e)
