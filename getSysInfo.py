@@ -3,6 +3,7 @@
 #-----------------------------------------------------------------------------
 #
 # TODO:: Use python to retrieve computer information
+# TODO:: Convert .py to .exe
 #
 #
 # pip install wmi
