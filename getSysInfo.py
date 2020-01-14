@@ -62,6 +62,13 @@ try:
         print('-')
         
 
+    # Processor name
+    print('\n---------- Win32_Processor -------------')
+    for pr in conn.Win32_Processor():
+        print( 'CPU: {}'.format(pr.Name))
+        print( 'ProcessorId: {}'.format(pr.ProcessorId))
+        print('-')
+
 
 except Exception as e:
     print(e)
